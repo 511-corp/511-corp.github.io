@@ -375,7 +375,7 @@
                     <div class="pt-6 mt-6 border-t border-dark-600 flex items-center justify-between">
                         <div>
                             <span class="text-[10px] text-silver-400 block">WA Divisi Web</span>
-                            <span class="text-xs font-bold text-gold-400">0899-0766-592</span>
+                            <span class="text-xs font-bold text-gold-400">0857-9425-3310</span>
                         </div>
                         <button onclick="openOrderModal('Web Development')" class="px-4 py-2 rounded-lg btn-gold text-dark-900 text-xs font-bold transition-all">
                             Pesan
@@ -702,9 +702,9 @@
                     </div>
                     <div>
                         <h4 class="font-bold text-white text-base">Divisi Web Developer</h4>
-                        <p class="text-gold-400 font-extrabold text-sm mt-1">0899-0766-592</p>
+                        <p class="text-gold-400 font-extrabold text-sm mt-1">0857-9425-3310</p>
                     </div>
-                    <a href="https://wa.me/628990766592?text=Halo%20Admin%20Web%20Dev%20511%20Corp,%20saya%20ingin%20konsultasi/order" target="_blank" class="block w-full py-2.5 rounded-xl border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-dark-900 text-xs font-bold transition-all">
+                    <a href="https://wa.me/6285794253310?text=Halo%20Admin%20Web%20Dev%20511%20Corp,%20saya%20ingin%20konsultasi/order" target="_blank" class="block w-full py-2.5 rounded-xl border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-dark-900 text-xs font-bold transition-all">
                         Chat WhatsApp
                     </a>
                 </div>
@@ -766,7 +766,7 @@
                     <select id="modalService" onchange="updateModalDivisionInfo()" class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white focus:border-gold-400 outline-none">
                         <option value="Desain Grafis">Desain Grafis (WA: 0812-2220-160)</option>
                         <option value="Edit Video">Editing Video (WA: 0821-2458-7092)</option>
-                        <option value="Web Development">Web Development (WA: 0899-0766-592)</option>
+                        <option value="Web Development">Web Development (WA: 0857-9425-3310)</option>
                         <option value="Joki MLBB">Joki Mobile Legends (WA: 0899-7719-030)</option>
                     </select>
                 </div>
@@ -850,7 +850,7 @@
             const infoElem = document.getElementById('modalWaTarget');
             if (val === 'Desain Grafis') infoElem.innerText = "WA Desain (0812-2220-160)";
             else if (val === 'Edit Video') infoElem.innerText = "WA Video (0821-2458-7092)";
-            else if (val === 'Web Development') infoElem.innerText = "WA Web Dev (0899-0766-592)";
+            else if (val === 'Web Development') infoElem.innerText = "WA Web Dev (0857-9425-3310)";
             else if (val === 'Joki MLBB') infoElem.innerText = "WA Joki MLBB (0899-7719-030)";
         }
 
@@ -862,7 +862,7 @@
 
             let phone = "628122220160"; // Default Desain
             if (service === 'Edit Video') phone = "6282124587092";
-            else if (service === 'Web Development') phone = "628990766592";
+            else if (service === 'Web Development') phone = "6285794253310";
             else if (service === 'Joki MLBB') phone = "628997719030";
 
             const msg = `Halo Admin 511 Corp (${service}) 👋%0A%0ASaya ingin memesan layanan:%0A• *Nama Client:* ${name}%0A• *Layanan:* ${service}%0A• *Detail Kebutuhan:* ${brief}%0A%0AMohon respon dan estimasi pengerjaannya, terima kasih!`;
@@ -895,7 +895,6 @@
         function simulateOrderTrack() {
             const val = document.getElementById('trackInput').value.trim();
             if(!val) {
-                alert("Silakan masukkan ID Order Anda terlebih dahulu!");
                 return;
             }
             const res = document.getElementById('trackResult');
