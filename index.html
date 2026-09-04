@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>511 Corporation - Premium Digital & Gaming Services</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#060608',
+                            800: '#0F0F13',
+                            700: '#181820',
+                            600: '#242430'
+                        },
+                        gold: {
+                            300: '#FFE57F',
+                            400: '#F5C518',
+                            500: '#D4AF37',
+                            600: '#AA820A',
+                            700: '#806000'
+                        },
+                        silver: {
+                            300: '#F0F0F5',
+                            400: '#C5C5D0',
+                            500: '#9E9EA8',
+                            600: '#6E6E7A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            background-color: #060608;
+            color: #F0F0F5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFE57F 0%, #D4AF37 50%, #AA820A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Silver Gradient Text */
+        .text-silver-gradient {
+            background: linear-gradient(135deg, #FFFFFF 0%, #C5C5D0 50%, #808090 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Glass Border Glow */
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            transition: all 0.4s ease;
+        }
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+            transform: translateY(-4px);
+        }
+
+        /* Glassmorphism Card */
+        .glass-panel {
+            background: rgba(15, 15, 19, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Gold Action Button */
+        .btn-gold {
+            background: linear-gradient(135deg, #F5C518 0%, #D4AF37 50%, #AA820A 100%);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060608;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #242430;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Particle Canvas */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-dark-600/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-gold-600 via-gold-400 to-amber-200 flex items-center justify-center font-heading font-black text-dark-900 text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform">
+                    511
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-extrabold text-lg tracking-wider text-white flex items-center gap-1">
+                        511 <span class="text-gold-400">CORPORATION</span>
+                    </span>
+                    <span class="text-[10px] tracking-widest text-silver-500 uppercase font-semibold">Digital & Gaming Solution</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#hero" class="text-xs font-semibold uppercase tracking-wider text-silver-300 hover:text-gold-400 transition-colors">Beranda</a>
+                <a href="#services" class="text-xs font-semibold uppercase tracking-wider text-silver-300 hover:text-gold-400 transition-colors">Layanan Utama</a>
+                <a href="#calculator" class="text-xs font-semibold uppercase tracking-wider text-silver-300 hover:text-gold-400 transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-calculator text-gold-400"></i> Kalkulator ML
+                </a>
+                <a href="#portfolio" class="text-xs font-semibold uppercase tracking-wider text-silver-300 hover:text-gold-400 transition-colors">Portofolio</a>
+                <a href="#tracker" class="text-xs font-semibold uppercase tracking-wider text-silver-300 hover:text-gold-400 transition-colors">Cek Status</a>
+                <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-silver-300 hover:text-gold-400 transition-colors">Kontak Divisi</a>
+            </nav>
+
+            <!-- Action Button Header -->
+            <div class="hidden lg:flex items-center gap-3">
+                <button onclick="openOrderModal()" class="px-5 py-2.5 rounded-xl btn-gold text-dark-900 font-bold text-xs tracking-wider uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Order Sekarang
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-silver-300 hover:text-gold-400 text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-dark-900/95 border-b border-dark-600 px-6 py-6 space-y-4">
+            <a href="#hero" onclick="closeMobileMenu()" class="block text-sm font-semibold text-silver-300 hover:text-gold-400">Beranda</a>
+            <a href="#services" onclick="closeMobileMenu()" class="block text-sm font-semibold text-silver-300 hover:text-gold-400">Layanan Utama</a>
+            <a href="#calculator" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gold-400">Kalkulator Joki MLBB</a>
+            <a href="#portfolio" onclick="closeMobileMenu()" class="block text-sm font-semibold text-silver-300 hover:text-gold-400">Portofolio</a>
+            <a href="#tracker" onclick="closeMobileMenu()" class="block text-sm font-semibold text-silver-300 hover:text-gold-400">Pelacak Pesanan</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="block text-sm font-semibold text-silver-300 hover:text-gold-400">Kontak WhatsApp Divisi</a>
+            <button onclick="openOrderModal(); closeMobileMenu();" class="w-full mt-2 py-3 rounded-xl btn-gold text-dark-900 font-bold text-xs tracking-wider uppercase">
+                Pesan Layanan
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
+            <div class="max-w-5xl mx-auto text-center space-y-8">
+                
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-gold-500/30 text-xs font-medium text-gold-300 animate-float">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Layanan Professional Digital & Gaming Top-Class</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-tight">
+                    Mewujudkan Visi Visual & <br class="hidden sm:inline"/>
+                    <span class="text-gold-gradient">Prestasi Game Tanpa Batas</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="max-w-3xl mx-auto text-sm sm:text-lg text-silver-400 leading-relaxed">
+                    <strong class="text-silver-300">511 Corporation</strong> menyediakan solusi digital terlengkap: Desain Grafis Kreatif, Video Editing Berkelas, Web Development Modern, hingga Joki MLBB Profesional dengan Garansi Keamanan Akun.
+                </p>
+
+                <!-- CTA Button Cluster -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <a href="#services" class="w-full sm:w-auto px-8 py-4 rounded-xl btn-gold text-dark-900 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-list-check text-base"></i> Jelajahi Semua Layanan
+                    </a>
+                    <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-gold-500/40 hover:border-gold-400 text-gold-400 font-bold text-sm tracking-wider uppercase flex items-center justify-center gap-3 transition-all hover:bg-gold-500/10">
+                        <i class="fa-solid fa-gamepad text-base"></i> Hitung Biaya Joki ML
+                    </a>
+                </div>
+
+                <!-- Feature Highlights Bar -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 text-left">
+                    <div class="glass-panel p-4 rounded-xl border-l-2 border-gold-500">
+                        <div class="text-gold-400 font-bold text-lg font-heading">100% Aman</div>
+                        <div class="text-silver-500 text-xs mt-0.5">Garansi Privasi & Akun</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border-l-2 border-silver-400">
+                        <div class="text-white font-bold text-lg font-heading">Tim Spesialis</div>
+                        <div class="text-silver-500 text-xs mt-0.5">Admin Per Divisi</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border-l-2 border-gold-500">
+                        <div class="text-gold-400 font-bold text-lg font-heading">Proses Cepat</div>
+                        <div class="text-silver-500 text-xs mt-0.5">Sesuai Deadline</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border-l-2 border-silver-400">
+                        <div class="text-white font-bold text-lg font-heading">24/7 Response</div>
+                        <div class="text-silver-500 text-xs mt-0.5">Siap Melayani Chat</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Services Section (4 Main Cards) -->
+        <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs font-bold text-gold-400 uppercase tracking-widest bg-gold-500/10 px-4 py-1.5 rounded-full border border-gold-500/20">Layanan Unggulan</span>
+                <h2 class="text-3xl sm:text-5xl font-heading font-black text-white">4 Divisi Utama <span class="text-gold-gradient">511 Corp</span></h2>
+                <p class="text-silver-400 max-w-2xl mx-auto text-sm">Pilih divisi layanan yang Anda butuhkan. Setiap divisi ditangani secara khusus oleh admin profesional melalui WhatsApp.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Service 1: Desain Grafis -->
+                <div class="bg-dark-800 rounded-2xl p-6 gold-border-glow flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gold-400 to-yellow-600 flex items-center justify-center text-dark-900 text-2xl font-bold shadow-lg shadow-gold-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-gold-400 uppercase tracking-wider">Kreatif & Visual</span>
+                            <h3 class="text-xl font-heading font-extrabold text-white mt-1">Desain Grafis</h3>
+                            <p class="text-silver-400 text-xs mt-2 leading-relaxed">
+                                Branding visual eksklusif untuk kebutuhan profesional, bisnis, maupun tim Esports Anda.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-silver-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Logo Vector & Branding Kit
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Poster / Banner Promosi
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Feed Instagram & Story Design
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> UI/UX Design Mockup
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-dark-600 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-silver-400 block">WA Divisi Desain</span>
+                            <span class="text-xs font-bold text-gold-400">0812-2220-160</span>
+                        </div>
+                        <button onclick="openOrderModal('Desain Grafis')" class="px-4 py-2 rounded-lg btn-gold text-dark-900 text-xs font-bold transition-all">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 2: Editing Video -->
+                <div class="bg-dark-800 rounded-2xl p-6 gold-border-glow flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-silver-300 to-gray-600 flex items-center justify-center text-dark-900 text-2xl font-bold shadow-lg shadow-silver-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-film"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-silver-300 uppercase tracking-wider">Multimedia & High Quality</span>
+                            <h3 class="text-xl font-heading font-extrabold text-white mt-1">Editing Video</h3>
+                            <p class="text-silver-400 text-xs mt-2 leading-relaxed">
+                                Pengolahan video kreatif untuk media sosial, promosi produk, hingga konten gaming cinematic.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-silver-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-silver-400"></i> TikTok, Shorts & Reels Editing
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-silver-400"></i> YouTube Content & Vlog
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-silver-400"></i> Gaming Highlights & SFX
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-silver-400"></i> Color Grading & Motion Text
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-dark-600 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-silver-400 block">WA Divisi Video</span>
+                            <span class="text-xs font-bold text-silver-300">0821-2458-7092</span>
+                        </div>
+                        <button onclick="openOrderModal('Edit Video')" class="px-4 py-2 rounded-lg bg-silver-500 hover:bg-silver-400 text-dark-900 text-xs font-bold transition-all">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 3: Web Development -->
+                <div class="bg-dark-800 rounded-2xl p-6 gold-border-glow flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gold-300 to-amber-700 flex items-center justify-center text-dark-900 text-2xl font-bold shadow-lg shadow-gold-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-gold-400 uppercase tracking-wider">Digital Architecture</span>
+                            <h3 class="text-xl font-heading font-extrabold text-white mt-1">Web Development</h3>
+                            <p class="text-silver-400 text-xs mt-2 leading-relaxed">
+                                Pembuatan website modern, responsif, berkecepatan tinggi, serta ramah SEO untuk bisnis Anda.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-silver-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Landing Page Promosi / UMKM
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Website E-Commerce / Store
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Portal TopUp Game Store
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-gold-400"></i> Responsive Mobile & Fast Load
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-dark-600 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-silver-400 block">WA Divisi Web</span>
+                            <span class="text-xs font-bold text-gold-400">0899-0766-592</span>
+                        </div>
+                        <button onclick="openOrderModal('Web Development')" class="px-4 py-2 rounded-lg btn-gold text-dark-900 text-xs font-bold transition-all">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 4: Joki Mobile Legends -->
+                <div class="bg-dark-800 rounded-2xl p-6 gold-border-glow flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-700 flex items-center justify-center text-dark-900 text-2xl font-bold shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Fast Rank MLBB</span>
+                            <h3 class="text-xl font-heading font-extrabold text-white mt-1">Joki MLBB</h3>
+                            <p class="text-silver-400 text-xs mt-2 leading-relaxed">
+                                Jasa penataan rank MLBB secara manual oleh Pro Player dengan winrate tinggi & garansi akun aman.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-silver-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i> Epic (8k) & Legend (10k)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i> Mythic & Honor (13k)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i> Glory (18k) & Immortal (22k)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i> Request Hero & Fast Track
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-dark-600 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-silver-400 block">Mulai Dari</span>
+                            <span class="text-sm font-bold text-emerald-400">Rp 8.000 / Star</span>
+                        </div>
+                        <a href="#calculator" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-dark-900 text-xs font-bold transition-all">
+                            Kalkulator ML
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive MLBB Joki Calculator Section -->
+        <section id="calculator" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-gold-500/30 relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center space-y-3 mb-10">
+                    <span class="text-xs font-bold text-gold-400 uppercase tracking-widest bg-gold-500/10 px-4 py-1.5 rounded-full border border-gold-500/20">
+                        <i class="fa-solid fa-calculator mr-1"></i> Interactive Calculator
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Kalkulator Joki <span class="text-gold-gradient">Mobile Legends</span></h2>
+                    <p class="text-silver-400 text-xs sm:text-sm">Hitung estimasi total biaya joki MLBB berdasarkan tingkat rank pilihan Anda.</p>
+                </div>
+
+                <!-- Price List Cards Reference -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
+                    <div class="p-3 bg-dark-900/80 rounded-xl border border-dark-600 text-center">
+                        <span class="text-[10px] text-silver-400 block uppercase font-semibold">Epic</span>
+                        <span class="text-xs font-extrabold text-gold-400">Rp 8.000 /⭐</span>
+                    </div>
+                    <div class="p-3 bg-dark-900/80 rounded-xl border border-dark-600 text-center">
+                        <span class="text-[10px] text-silver-400 block uppercase font-semibold">Legend</span>
+                        <span class="text-xs font-extrabold text-gold-400">Rp 10.000 /⭐</span>
+                    </div>
+                    <div class="p-3 bg-dark-900/80 rounded-xl border border-dark-600 text-center">
+                        <span class="text-[10px] text-silver-400 block uppercase font-semibold">Mythic / Honor</span>
+                        <span class="text-xs font-extrabold text-gold-400">Rp 13.000 /⭐</span>
+                    </div>
+                    <div class="p-3 bg-dark-900/80 rounded-xl border border-dark-600 text-center">
+                        <span class="text-[10px] text-silver-400 block uppercase font-semibold">Mythic Glory</span>
+                        <span class="text-xs font-extrabold text-gold-400">Rp 18.000 /⭐</span>
+                    </div>
+                    <div class="p-3 bg-dark-900/80 rounded-xl border border-dark-600 text-center col-span-2 sm:col-span-1">
+                        <span class="text-[10px] text-silver-400 block uppercase font-semibold">Mythic Immortal</span>
+                        <span class="text-xs font-extrabold text-gold-400">Rp 22.000 /⭐</span>
+                    </div>
+                </div>
+
+                <!-- Calculator Form -->
+                <div class="grid md:grid-cols-2 gap-8 items-center bg-dark-900/60 p-6 rounded-2xl border border-dark-600">
+                    
+                    <div class="space-y-5">
+                        <!-- Rank Selection -->
+                        <div>
+                            <label class="block text-xs font-semibold text-silver-300 uppercase mb-2">Pilih Rank Joki</label>
+                            <select id="mlRankSelect" onchange="calculateMlbbPrice()" class="w-full bg-dark-800 border border-dark-600 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-400">
+                                <option value="8000">Epic Tier — Rp 8.000 / Bintang</option>
+                                <option value="10000">Legend Tier — Rp 10.000 / Bintang</option>
+                                <option value="13000" selected>Mythic & Mythical Honor — Rp 13.000 / Bintang</option>
+                                <option value="18000">Mythical Glory Tier — Rp 18.000 / Bintang</option>
+                                <option value="22000">Mythical Immortal Tier — Rp 22.000 / Bintang</option>
+                            </select>
+                        </div>
+
+                        <!-- Stars Count -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-semibold text-silver-300 uppercase">Jumlah Bintang / Point</label>
+                                <span id="starDisplay" class="text-sm font-bold text-gold-400">10 Bintang</span>
+                            </div>
+                            <input type="range" id="mlStarSlider" min="1" max="50" value="10" oninput="calculateMlbbPrice()" class="w-full accent-gold-500 bg-dark-700 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Additional Options -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-silver-300 uppercase">Opsi Layanan Tambahan</label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg bg-dark-800/80 border border-dark-600 text-xs text-silver-300 cursor-pointer">
+                                <input type="checkbox" id="optReqHero" onchange="calculateMlbbPrice()" class="rounded accent-gold-500">
+                                <span>Request Hero Favorit (+15%)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg bg-dark-800/80 border border-dark-600 text-xs text-silver-300 cursor-pointer">
+                                <input type="checkbox" id="optFastTrack" onchange="calculateMlbbPrice()" class="rounded accent-gold-500">
+                                <span>Fast Track / Prioritas Pengerjaan (+25%)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Total Price Display & Order CTA -->
+                    <div class="glass-panel p-6 rounded-2xl border border-gold-500/30 text-center space-y-5">
+                        <span class="text-xs text-silver-400 uppercase font-semibold block">Total Estimasi Biaya</span>
+                        <div id="mlTotalPrice" class="text-3xl sm:text-4xl font-heading font-black text-gold-400">
+                            Rp 130.000
+                        </div>
+                        <p class="text-[11px] text-silver-500 leading-normal">
+                            Harga sudah termasuk jaminan winrate tinggi & kerahasiaan login. Otomatis dikirimkan ke <strong>WA Divisi Joki MLBB (0899-7719-030)</strong>.
+                        </p>
+                        <button onclick="orderJokiMlbbViaWA()" class="w-full py-3.5 rounded-xl btn-gold text-dark-900 font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Order Joki Ke WA Admin
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase -->
+        <section id="portfolio" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-12">
+                <span class="text-xs font-bold text-gold-400 uppercase tracking-widest bg-gold-500/10 px-4 py-1.5 rounded-full border border-gold-500/20">Karya & Hasil Pekerjaan</span>
+                <h2 class="text-3xl sm:text-5xl font-heading font-black text-white">Portofolio <span class="text-silver-gradient">Eksklusif</span></h2>
+                <p class="text-silver-400 max-w-2xl mx-auto text-sm">Contoh hasil desain, video editing, dan pembuatan website karya 511 Corporation.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex justify-center gap-2 sm:gap-4 mb-10 flex-wrap">
+                <button onclick="filterPortfolio('all')" class="port-filter-btn active px-4 py-2 rounded-xl text-xs font-bold bg-gold-500 text-dark-900 transition-all">Semua Karya</button>
+                <button onclick="filterPortfolio('desain')" class="port-filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-panel text-silver-300 hover:text-gold-400 transition-all">Desain Grafis</button>
+                <button onclick="filterPortfolio('video')" class="port-filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-panel text-silver-300 hover:text-gold-400 transition-all">Video Editing</button>
+                <button onclick="filterPortfolio('web')" class="port-filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-panel text-silver-300 hover:text-gold-400 transition-all">Web Dev</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Item 1: Desain -->
+                <div class="port-item desain glass-panel rounded-2xl overflow-hidden border border-dark-600 group">
+                    <div class="h-52 bg-gradient-to-tr from-amber-900 to-amber-700 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid fa-vector-square text-6xl text-gold-300 opacity-40 group-hover:scale-125 transition-transform duration-500"></i>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 bg-dark-900/80 rounded-lg text-[10px] font-bold text-gold-400">Esports Branding Kit</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-white text-base">Mascot Logo & Esports Identity</h4>
+                        <p class="text-silver-400 text-xs mt-1">Pembuatan logo vektor, jersey design, dan overlay stream.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Video -->
+                <div class="port-item video glass-panel rounded-2xl overflow-hidden border border-dark-600 group">
+                    <div class="h-52 bg-gradient-to-tr from-gray-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid fa-play-circle text-6xl text-silver-300 opacity-40 group-hover:scale-125 transition-transform duration-500"></i>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 bg-dark-900/80 rounded-lg text-[10px] font-bold text-silver-300">Commercial Reels</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-white text-base">Cinematic Promotional Reel</h4>
+                        <p class="text-silver-400 text-xs mt-1">Editing TikTok/Instagram Reels dengan motion graphics & SFX.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Web -->
+                <div class="port-item web glass-panel rounded-2xl overflow-hidden border border-dark-600 group">
+                    <div class="h-52 bg-gradient-to-tr from-amber-950 to-neutral-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid fa-laptop-code text-6xl text-gold-400 opacity-40 group-hover:scale-125 transition-transform duration-500"></i>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 bg-dark-900/80 rounded-lg text-[10px] font-bold text-gold-400">E-Commerce Web</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-white text-base">TopUp Game Store Platform</h4>
+                        <p class="text-silver-400 text-xs mt-1">Sistem web e-commerce responsif dengan payment gateway.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Desain -->
+                <div class="port-item desain glass-panel rounded-2xl overflow-hidden border border-dark-600 group">
+                    <div class="h-52 bg-gradient-to-tr from-yellow-900 to-zinc-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid fa-newspaper text-6xl text-gold-300 opacity-40 group-hover:scale-125 transition-transform duration-500"></i>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 bg-dark-900/80 rounded-lg text-[10px] font-bold text-gold-400">Social Media Pack</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-white text-base">Instagram Feed Promosi UMKM</h4>
+                        <p class="text-silver-400 text-xs mt-1">10 Feed & Story template eksklusif bertema modern gold.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5: Video -->
+                <div class="port-item video glass-panel rounded-2xl overflow-hidden border border-dark-600 group">
+                    <div class="h-52 bg-gradient-to-tr from-zinc-800 to-slate-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid fa-gamepad text-6xl text-emerald-400 opacity-40 group-hover:scale-125 transition-transform duration-500"></i>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 bg-dark-900/80 rounded-lg text-[10px] font-bold text-emerald-400">MLBB Highlight</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-white text-base">Montage Game MLBB Fast Hand</h4>
+                        <p class="text-silver-400 text-xs mt-1">High-fps gameplay montage dengan beat sync & color grading.</p>
+                    </div>
+                </div>
+
+                <!-- Item 6: Web -->
+                <div class="port-item web glass-panel rounded-2xl overflow-hidden border border-dark-600 group">
+                    <div class="h-52 bg-gradient-to-tr from-amber-900 to-slate-900 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid fa-globe text-6xl text-gold-400 opacity-40 group-hover:scale-125 transition-transform duration-500"></i>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 bg-dark-900/80 rounded-lg text-[10px] font-bold text-gold-400">Company Profile</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-white text-base">Corporate Landing Page</h4>
+                        <p class="text-silver-400 text-xs mt-1">Website resmi perusahaan dengan animasi smooth & fast loading.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Order Tracking System Simulation -->
+        <section id="tracker" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-silver-500/20 text-center space-y-6">
+                <span class="text-xs font-bold text-silver-300 uppercase tracking-widest bg-silver-500/10 px-4 py-1.5 rounded-full border border-silver-500/20">
+                    <i class="fa-solid fa-magnifying-glass mr-1"></i> Order Tracker System
+                </span>
+                <h2 class="text-3xl font-heading font-black text-white">Lacak Status <span class="text-gold-gradient">Pesanan Anda</span></h2>
+                <p class="text-silver-400 text-xs sm:text-sm">Masukkan ID Pesanan (Contoh: <code class="text-gold-400">511-8921</code>) yang didapatkan saat memesan via WhatsApp.</p>
+
+                <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="text" id="trackInput" placeholder="Masukkan ID Order (misal: 511-8921)" class="flex-grow bg-dark-800 border border-dark-600 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-400">
+                    <button onclick="simulateOrderTrack()" class="px-6 py-3 rounded-xl btn-gold text-dark-900 font-bold text-xs uppercase tracking-wider">
+                        Cek Status
+                    </button>
+                </div>
+
+                <!-- Simulation Output Box -->
+                <div id="trackResult" class="hidden mt-6 p-6 bg-dark-900 rounded-2xl border border-dark-600 text-left space-y-4">
+                    <div class="flex justify-between items-center border-b border-dark-700 pb-3">
+                        <div>
+                            <span class="text-[10px] text-silver-500 block">ID PESANAN</span>
+                            <span id="resTrackId" class="text-sm font-bold text-gold-400">511-8921</span>
+                        </div>
+                        <span id="resTrackBadge" class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                            Sedang Diproses
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <span class="text-silver-500 block">Jenis Layanan:</span>
+                            <span id="resTrackService" class="font-semibold text-white">Web Development</span>
+                        </div>
+                        <div>
+                            <span class="text-silver-500 block">Estimasi Selesai:</span>
+                            <span id="resTrackTime" class="font-semibold text-white">24-48 Jam Kerja</span>
+                        </div>
+                    </div>
+                    <div class="w-full bg-dark-700 h-2 rounded-full overflow-hidden">
+                        <div id="resTrackProgress" class="bg-gradient-to-r from-gold-500 to-emerald-400 h-full w-[65%] rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Division Contact Center Section -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-14">
+                <span class="text-xs font-bold text-gold-400 uppercase tracking-widest bg-gold-500/10 px-4 py-1.5 rounded-full border border-gold-500/20">Direct Support</span>
+                <h2 class="text-3xl sm:text-5xl font-heading font-black text-white">Kontak WhatsApp <span class="text-gold-gradient">Per Divisi</span></h2>
+                <p class="text-silver-400 max-w-2xl mx-auto text-sm">Setiap unit kerja memiliki Admin khusus untuk merespon konsultasi & pesanan Anda secara cepat.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Divisi 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-dark-600 text-center space-y-4 hover:border-gold-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Divisi Desain Grafis</h4>
+                        <p class="text-gold-400 font-extrabold text-sm mt-1">0812-2220-160</p>
+                    </div>
+                    <a href="https://wa.me/628122220160?text=Halo%20Admin%20Desain%20Grafis%20511%20Corp,%20saya%20ingin%20konsultasi/order" target="_blank" class="block w-full py-2.5 rounded-xl border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-dark-900 text-xs font-bold transition-all">
+                        Chat WhatsApp
+                    </a>
+                </div>
+
+                <!-- Divisi 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-dark-600 text-center space-y-4 hover:border-silver-400/40 transition-all">
+                    <div class="w-12 h-12 rounded-full bg-silver-500/20 text-silver-300 flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Divisi Video Editor</h4>
+                        <p class="text-silver-300 font-extrabold text-sm mt-1">0821-2458-7092</p>
+                    </div>
+                    <a href="https://wa.me/6282124587092?text=Halo%20Admin%20Video%20Editor%20511%20Corp,%20saya%20ingin%20konsultasi/order" target="_blank" class="block w-full py-2.5 rounded-xl border border-silver-400/40 text-silver-300 hover:bg-silver-400 hover:text-dark-900 text-xs font-bold transition-all">
+                        Chat WhatsApp
+                    </a>
+                </div>
+
+                <!-- Divisi 3 -->
+                <div class="glass-panel p-6 rounded-2xl border border-dark-600 text-center space-y-4 hover:border-gold-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Divisi Web Developer</h4>
+                        <p class="text-gold-400 font-extrabold text-sm mt-1">0899-0766-592</p>
+                    </div>
+                    <a href="https://wa.me/628990766592?text=Halo%20Admin%20Web%20Dev%20511%20Corp,%20saya%20ingin%20konsultasi/order" target="_blank" class="block w-full py-2.5 rounded-xl border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-dark-900 text-xs font-bold transition-all">
+                        Chat WhatsApp
+                    </a>
+                </div>
+
+                <!-- Divisi 4 -->
+                <div class="glass-panel p-6 rounded-2xl border border-dark-600 text-center space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Divisi Joki MLBB</h4>
+                        <p class="text-emerald-400 font-extrabold text-sm mt-1">0899-7719-030</p>
+                    </div>
+                    <a href="https://wa.me/628997719030?text=Halo%20Admin%20Joki%20MLBB%20511%20Corp,%20saya%20ingin%20konsultasi/order" target="_blank" class="block w-full py-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500 hover:text-dark-900 text-xs font-bold transition-all">
+                        Chat WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-dark-600/50 py-12 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="space-y-2">
+                <div class="font-heading font-extrabold text-lg text-white">
+                    511 <span class="text-gold-400">CORPORATION</span>
+                </div>
+                <p class="text-silver-500 text-xs">Penyedia Layanan Kreatif Digital & Fast Rank MLBB Terpercaya.</p>
+            </div>
+            <div class="text-silver-500 text-xs">
+                &copy; 2026 <span class="text-silver-300 font-semibold">511 Corporation</span>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Order Modal -->
+    <div id="orderModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-dark-800 border border-gold-500/40 w-full max-w-lg rounded-3xl p-6 sm:p-8 space-y-6 relative shadow-2xl">
+            <button onclick="closeOrderModal()" class="absolute top-5 right-5 text-silver-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold text-gold-400 uppercase tracking-widest">Form Pemesanan</span>
+                <h3 class="text-2xl font-heading font-black text-white">Order Layanan <span class="text-gold-gradient">511 Corp</span></h3>
+            </div>
+
+            <form onsubmit="submitGeneralOrder(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-silver-300 font-semibold mb-1">Nama Lengkap</label>
+                    <input type="text" id="modalName" required placeholder="Masukkan nama Anda" class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white focus:border-gold-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-silver-300 font-semibold mb-1">Kategori Layanan</label>
+                    <select id="modalService" onchange="updateModalDivisionInfo()" class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white focus:border-gold-400 outline-none">
+                        <option value="Desain Grafis">Desain Grafis (WA: 0812-2220-160)</option>
+                        <option value="Edit Video">Editing Video (WA: 0821-2458-7092)</option>
+                        <option value="Web Development">Web Development (WA: 0899-0766-592)</option>
+                        <option value="Joki MLBB">Joki Mobile Legends (WA: 0899-7719-030)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-silver-300 font-semibold mb-1">Catatan / Detail Brief Kebutuhan</label>
+                    <textarea id="modalBrief" rows="3" required placeholder="Jelaskan kebutuhan desain, video, web, atau rank target joki Anda..." class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white focus:border-gold-400 outline-none"></textarea>
+                </div>
+
+                <div class="p-3 bg-dark-900 rounded-xl border border-dark-700 text-[11px] text-silver-400 flex items-center justify-between">
+                    <span>Tujuan Chat WA:</span>
+                    <strong id="modalWaTarget" class="text-gold-400">WA Divisi Desain Grafis</strong>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl btn-gold text-dark-900 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Kirim Ke WhatsApp Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // MLBB Price Calculation
+        function calculateMlbbPrice() {
+            const pricePerStar = parseInt(document.getElementById('mlRankSelect').value);
+            const starCount = parseInt(document.getElementById('mlStarSlider').value);
+            const isReqHero = document.getElementById('optReqHero').checked;
+            const isFastTrack = document.getElementById('optFastTrack').checked;
+
+            document.getElementById('starDisplay').innerText = `${starCount} Bintang`;
+
+            let basePrice = pricePerStar * starCount;
+            if (isReqHero) basePrice += (pricePerStar * starCount) * 0.15;
+            if (isFastTrack) basePrice += (pricePerStar * starCount) * 0.25;
+
+            const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(basePrice);
+            document.getElementById('mlTotalPrice').innerText = formatted;
+        }
+
+        // Send Joki ML Order directly to WA 08997719030
+        function orderJokiMlbbViaWA() {
+            const selectElem = document.getElementById('mlRankSelect');
+            const rankText = selectElem.options[selectElem.selectedIndex].text;
+            const starCount = document.getElementById('mlStarSlider').value;
+            const isReqHero = document.getElementById('optReqHero').checked ? "Ya (+15%)" : "Tidak";
+            const isFastTrack = document.getElementById('optFastTrack').checked ? "Ya (+25%)" : "Tidak";
+            const totalPrice = document.getElementById('mlTotalPrice').innerText;
+
+            const message = `Halo Admin Divisi Joki MLBB 511 Corp 👋%0A%0ASaya ingin memesan Joki MLBB dengan rincian:%0A• *Tier Rank:* ${rankText}%0A• *Jumlah Bintang:* ${starCount}%0A• *Request Hero:* ${isReqHero}%0A• *Fast Track:* ${isFastTrack}%0A• *Estimasi Biaya:* ${totalPrice}%0A%0AMohon info cara pembayaran dan proses pengerjaannya, terima kasih!`;
+
+            window.open(`https://wa.me/628997719030?text=${message}`, '_blank');
+        }
+
+        // Universal Modal Functions
+        function openOrderModal(serviceName = 'Desain Grafis') {
+            document.getElementById('orderModal').classList.remove('hidden');
+            if (serviceName) {
+                document.getElementById('modalService').value = serviceName;
+            }
+            updateModalDivisionInfo();
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.add('hidden');
+        }
+
+        function updateModalDivisionInfo() {
+            const val = document.getElementById('modalService').value;
+            const infoElem = document.getElementById('modalWaTarget');
+            if (val === 'Desain Grafis') infoElem.innerText = "WA Desain (0812-2220-160)";
+            else if (val === 'Edit Video') infoElem.innerText = "WA Video (0821-2458-7092)";
+            else if (val === 'Web Development') infoElem.innerText = "WA Web Dev (0899-0766-592)";
+            else if (val === 'Joki MLBB') infoElem.innerText = "WA Joki MLBB (0899-7719-030)";
+        }
+
+        function submitGeneralOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const service = document.getElementById('modalService').value;
+            const brief = document.getElementById('modalBrief').value;
+
+            let phone = "628122220160"; // Default Desain
+            if (service === 'Edit Video') phone = "6282124587092";
+            else if (service === 'Web Development') phone = "628990766592";
+            else if (service === 'Joki MLBB') phone = "628997719030";
+
+            const msg = `Halo Admin 511 Corp (${service}) 👋%0A%0ASaya ingin memesan layanan:%0A• *Nama Client:* ${name}%0A• *Layanan:* ${service}%0A• *Detail Kebutuhan:* ${brief}%0A%0AMohon respon dan estimasi pengerjaannya, terima kasih!`;
+
+            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+            closeOrderModal();
+        }
+
+        // Portfolio Filter Logic
+        function filterPortfolio(category) {
+            const buttons = document.querySelectorAll('.port-filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-gold-500', 'text-dark-900', 'active');
+                btn.classList.add('glass-panel', 'text-silver-300');
+            });
+            event.currentTarget.classList.add('bg-gold-500', 'text-dark-900', 'active');
+            event.currentTarget.classList.remove('glass-panel', 'text-silver-300');
+
+            const items = document.querySelectorAll('.port-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Simulated Order Tracker
+        function simulateOrderTrack() {
+            const val = document.getElementById('trackInput').value.trim();
+            if(!val) {
+                alert("Silakan masukkan ID Order Anda terlebih dahulu!");
+                return;
+            }
+            const res = document.getElementById('trackResult');
+            res.classList.remove('hidden');
+            document.getElementById('resTrackId').innerText = val.toUpperCase();
+        }
+
+        // Particle Canvas Background Animation
+        window.onload = function() {
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                    this.color = Math.random() > 0.5 ? '#D4AF37' : '#C5C5D0';
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = this.opacity;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 40; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+            calculateMlbbPrice();
+        };
+    </script>
+</body>
+</html>
